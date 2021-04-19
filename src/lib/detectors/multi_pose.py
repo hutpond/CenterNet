@@ -86,7 +86,7 @@ class MultiPoseDetector(BaseDetector):
   def debug(self, debugger, images, dets, output, scale=1):
     dets = dets.detach().cpu().numpy().copy()
     dets[:, :, :4] *= self.opt.down_ratio
-    dets[:, :, 5:39] *= self.opt.down_ratio
+    dets[:, :, 5:(5 + self.num_classes * 2)] *= self.opt.down_ratio
     img = images[0].detach().cpu().numpy().transpose(1, 2, 0)
     img = np.clip(((
       img * self.std + self.mean) * 255.), 0, 255).astype(np.uint8)

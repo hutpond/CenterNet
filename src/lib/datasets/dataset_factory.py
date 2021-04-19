@@ -12,6 +12,7 @@ from .dataset.pascal import PascalVOC
 from .dataset.kitti import KITTI
 from .dataset.coco_hp import COCOHP
 from .dataset.catface_hp import CatFaceHP
+from .dataset.hand_points_hp import HandPointsHP
 
 
 dataset_factory = {
@@ -19,7 +20,8 @@ dataset_factory = {
   'pascal': PascalVOC,
   'kitti': KITTI,
   'coco_hp': COCOHP,
-  'catface_hp': CatFaceHP
+  'catface_hp': CatFaceHP,
+  'handpoints_hp': HandPointsHP
 }
 
 _sample_factory = {
