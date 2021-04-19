@@ -331,10 +331,9 @@ class opts(object):
         opt.heads.update({'hp_offset': 2})
     else:
       assert 0, 'task not defined!'
-    print('heads', opt.heads)
     return opt
 
-  def init(self, args=''):
+  def init(self, args='', opt_parse=None):
     default_dataset_info = {
       'ctdet': {'default_resolution': [512, 512], 'num_classes': 80, 
                 'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
@@ -360,4 +359,9 @@ class opts(object):
     dataset = Struct(default_dataset_info[opt.task])
     opt.dataset = dataset.dataset
     opt = self.update_dataset_info_and_set_heads(opt, dataset)
+    if opt_parse is not None:
+      opt.flip_idx = opt_parse.flip_idx
+      opt.num_joints = opt_parse.num_joints
+      opt.heads = opt_parse.heads
+      opt.dataset = opt_parse.dataset
     return opt

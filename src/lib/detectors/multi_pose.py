@@ -86,7 +86,7 @@ class MultiPoseDetector(BaseDetector):
   def debug(self, debugger, images, dets, output, scale=1):
     dets = dets.detach().cpu().numpy().copy()
     dets[:, :, :4] *= self.opt.down_ratio
-    dets[:, :, 5:(5 + self.num_classes * 2)] *= self.opt.down_ratio
+    dets[:, :, 5:(5 + self.num_joints * 2)] *= self.opt.down_ratio
     img = images[0].detach().cpu().numpy().transpose(1, 2, 0)
     img = np.clip(((
       img * self.std + self.mean) * 255.), 0, 255).astype(np.uint8)
@@ -102,5 +102,5 @@ class MultiPoseDetector(BaseDetector):
     for bbox in results[1]:
       if bbox[4] > self.opt.vis_thresh:
         debugger.add_coco_bbox(bbox[:4], 0, bbox[4], img_id='multi_pose')
-        debugger.add_coco_hp(bbox[5:39], img_id='multi_pose')
+        debugger.add_coco_hp(bbox[5:(5 + self.num_joints * 2)], img_id='multi_pose')
     debugger.show_all_imgs(pause=self.pause)

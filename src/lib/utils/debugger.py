@@ -62,6 +62,13 @@ class Debugger(object):
       self.focal_length = 721.5377
       self.W = 1242
       self.H = 375
+    elif dataset == 'handpoints_hp':
+      self.names = ['handpoints']
+      self.num_class = 1
+      self.num_joints = 3
+      self.edges = [[0, 1], [1, 2]]
+      self.ec = [(255, 0, 0), (0, 0, 255), (255, 0, 255)]
+      self.colors_hp = [(255, 0, 255), (255, 0, 0), (0, 0, 255)]
     num_classes = len(self.names)
     self.down_ratio=down_ratio
     # for bird view
