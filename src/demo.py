@@ -54,8 +54,11 @@ def demo(opt):
       print(time_str)
 if __name__ == '__main__':
   opt = opts().parse()
-  Dataset = get_dataset(opt.dataset, opt.task)
-  opt = opts().update_dataset_info_and_set_heads(opt, Dataset)
+  if opt.task == 'handpoints_hp':
+    Dataset = get_dataset(opt.dataset, opt.task)
+    opt = opts().update_dataset_info_and_set_heads(opt, Dataset)
 
-  opt = opts().init(opt_parse=opt)
+    opt = opts().init(opt.dataset)
+  else:
+        opt = opts().init()
   demo(opt)
